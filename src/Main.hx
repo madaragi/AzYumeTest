@@ -5,6 +5,7 @@ import flash.display.BitmapData;
 import flash.display.DisplayObjectContainer;
 import flash.display.Sprite;
 import flash.display.StageAlign;
+import flash.display.StageQuality;
 import flash.display.StageScaleMode;
 import flash.Lib;
 import flash.events.Event;
@@ -28,6 +29,7 @@ class Main
 		var stage = Lib.current.stage;
 		stage.scaleMode = StageScaleMode.NO_SCALE;
 		stage.align = StageAlign.TOP_LEFT;
+		stage.quality = StageQuality.LOW;
 		
 		Filters.init();
 		OldInput.init();

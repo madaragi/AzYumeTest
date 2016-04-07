@@ -1,5 +1,6 @@
 package;
 
+import flash.display.MovieClip;
 import flash.display.Sprite;
 import flash.display.Bitmap;
 import flash.display.BitmapData;
@@ -37,10 +38,15 @@ class Player extends Sprite
 		pos.x = 120;
 		acl = gravity;
 		
+		/*
 		var standImg:Bitmap = new Bitmap(new PlayerBitmap(0, 0));
 		standImg.x = -standImg.width / 2;
 		standImg.y = -standImg.height / 2;
 		addChild(standImg);
+		*/
+		var animation:MovieClip = new PlayerAnimation();
+		
+		addChild(animation);
 		
 		addEventListener(MouseEvent.CLICK, function(e:MouseEvent) {
 			if (filters.length > 0) {
