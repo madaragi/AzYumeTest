@@ -11,6 +11,9 @@ import flash.events.Event;
 import flash.events.EventDispatcher;
 import flash.events.KeyboardEvent;
 
+@:bitmap("bin/resources/testchipA.png")
+class ChipA extends BitmapData {}
+
 /**
  * ...
  * @author 
@@ -40,18 +43,24 @@ class Main
 		screen.scaleX = 3;
 		screen.scaleY = 3;
 		screen.opaqueBackground = 0xFFCC99;
-		screen.graphics.beginFill(0xFFBB99);
+		screen.graphics.beginFill(0xFFEEDD);
 		screen.graphics.drawRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
 		screen.graphics.endFill();
 		//var screen:Bitmap = new Bitmap(new BitmapData(SCREEN_WIDTH, SCREEN_HEIGHT, false, 0xFFBB99);
 		
+		var chipA = new Bitmap(new ChipA(0, 0));
+		screen.addChild(chipA);
+		chipA.x = 50;
+		chipA.y = 30;
+		//chipA.scaleX = 2;
+		//chipA.scaleY = 2;
 		
 		var textLayer = new TextLayer(0,340);
 		stage.addChild(textLayer);
 		
 		var charaLayer = new CharacterLayer();
 		charaLayer.x = -50;
-		charaLayer.y = 200;
+		charaLayer.y = 240;
 		stage.addChild(charaLayer);
 	}
 }

@@ -78,7 +78,7 @@ class Player extends Sprite
 			if (vel > 2) {
 				vel = 2;
 			}
-			if (pos.y > 90) pos.y = 90;
+			if (pos.y > 80) pos.y = 80;
 			
 			x = Math.ceil(pos.x);
 			y = Math.ceil(pos.y);
