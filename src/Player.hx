@@ -11,9 +11,9 @@ import flash.geom.Point;
 @:bitmap("bin/resources/player.png")
 class PlayerBitmap extends BitmapData{}
 
-enum Direction {
-	RIGHT;
-	LEFT;
+enum PlayerState {
+	STAND;
+	RUN;
 }
 
 /**
@@ -23,20 +23,23 @@ enum Direction {
 class Player extends Sprite
 {
 	var jumpSpeed:Float = 2.0;
-	var walkSpeed:Float = 2;
+	var walkSpeed:Float = 1.3333;
 	var gravity:Float = 0.1;
 	var hFlip:Bool = false;
 	var vFlip:Bool = false;
 	var acl:Float = 0;
 	var vel:Float = 0;
 	var pos:Point = new Point(0, 0);
-	
+	var animation:MovieClip;
+	var state:PlayerState;
 	
 	public function new() 
 	{
 		super();
 		pos.x = 120;
+		pos.y = 80;
 		acl = gravity;
+		state = STAND;
 		
 		/*
 		var standImg:Bitmap = new Bitmap(new PlayerBitmap(0, 0));
@@ -44,8 +47,7 @@ class Player extends Sprite
 		standImg.y = -standImg.height / 2;
 		addChild(standImg);
 		*/
-		var animation:MovieClip = new PlayerAnimation();
-		
+		animation = new PlayerAnimation();
 		addChild(animation);
 		
 		addEventListener(MouseEvent.CLICK, function(e:MouseEvent) {
@@ -59,20 +61,25 @@ class Player extends Sprite
 
 		//毎フレーム処理
 		addEventListener(Event.ENTER_FRAME, function(e:Event) {
-			if (Input.down(Key.D)) {
-				pos.x += walkSpeed;
-				hFlip = false;
+			if(state == STAND) {
+				if (Input.down(Key.D) || Input.down(Key.A)) {
+					animation.gotoAndPlay("run");
+					state = RUN;
+				}
 			}
-			else if (Input.down(Key.A)) {
-				pos.x -= walkSpeed;
-				hFlip = true;
-			}
-			
-			if (Input.justDown(Key.S)) {
-				vFlip = false;
-			}
-			if (Input.justDown(Key.W)) {
-				vFlip = true;
+			if(state == RUN) {
+				if (Input.down(Key.D)) {
+					pos.x += walkSpeed;
+					hFlip = false;
+				}
+				else if (Input.down(Key.A)) {
+					pos.x -= walkSpeed;
+					hFlip = true;
+				}
+				else {
+					state = STAND;
+					animation.gotoAndPlay("stand");
+				}
 			}
 			
 			if (Input.justDown(Key.SPACE)) {
