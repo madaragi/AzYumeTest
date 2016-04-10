@@ -36,17 +36,11 @@ class Player extends Sprite
 	public function new() 
 	{
 		super();
-		pos.x = 120;
+		pos.x = 100;
 		pos.y = 80;
 		acl = gravity;
 		state = STAND;
 		
-		/*
-		var standImg:Bitmap = new Bitmap(new PlayerBitmap(0, 0));
-		standImg.x = -standImg.width / 2;
-		standImg.y = -standImg.height / 2;
-		addChild(standImg);
-		*/
 		animation = new PlayerAnimation();
 		addChild(animation);
 		

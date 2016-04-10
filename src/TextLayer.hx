@@ -35,13 +35,19 @@ class TextLayer extends Sprite
 		var bgBitmap = new Bitmap(bg);
 		addChild(bgBitmap);
 		
+		var endNotice = new Bitmap(new BitmapData(20, 20, false, 0x000000));
+		endNotice.x = 640;
+		endNotice.y = 100;
+		endNotice.visible = false;
+		addChild(endNotice);
 		
-		var speaker = new TextSpeaker();
+		var speaker = new TextSpeaker(endNotice);
 		speaker.x = 220;
 		speaker.y = 6;
 		addChild(speaker);
 		
-		speaker.speak("いやいや 絶対おかしいでしょ");
+		speaker.speak("いやいや 絶対おかしいでしょ。上手いこと言って自分の都合のいいように解釈しようとしてない？");
+		speaker.addText(["これは二番目の文章", "ちなみにこれは3番目の文章で、改ページするためにちょっと長めにしゃべってる"]);
 		//　[cp] = change paragraph
 		// [exp:angry] = expression
 	}
