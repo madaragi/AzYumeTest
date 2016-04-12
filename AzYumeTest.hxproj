@@ -24,7 +24,7 @@
     <option noInlineOnDebug="False" />
     <option mainClass="Main" />
     <option enabledebug="True" />
-    <option additional="-swf-lib ../playerAnimation.swc" />
+    <option additional="-swf-lib ../playerAnimation.swc&#xA;-swf-lib ../characterExpressions.swc" />
   </build>
   <!-- haxelib libraries -->
   <haxelib>

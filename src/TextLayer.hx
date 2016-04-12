@@ -46,7 +46,7 @@ class TextLayer extends Sprite
 		speaker.y = 6;
 		addChild(speaker);
 		
-		speaker.speak("いやいや 絶対おかしいでしょ。上手いこと言って自分の都合のいいように解釈しようとしてない？");
+		speaker.speak("ぽえー");
 		speaker.addText(["これは二番目の文章", "ちなみにこれは3番目の文章で、改ページするためにちょっと長めにしゃべってる"]);
 		//　[cp] = change paragraph
 		// [exp:angry] = expression
