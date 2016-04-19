@@ -14,6 +14,8 @@ class PlayerBitmap extends BitmapData{}
 enum PlayerState {
 	STAND;
 	RUN;
+	JUMP;
+	FALL;
 }
 
 /**
@@ -22,14 +24,15 @@ enum PlayerState {
  */
 class Player extends Sprite
 {
-	var jumpSpeed:Float = 2.0;
-	var walkSpeed:Float = 1.3333;
-	var gravity:Float = 0.1;
+	var jumpSpeed = 2.0;
+	var walkSpeed = 1.3333;
+	var fallMaxSpeed = 2.0;
+	var gravity = 0.1;
 	var hFlip:Bool = false;
 	var vFlip:Bool = false;
-	var acl:Float = 0;
-	var vel:Float = 0;
-	var pos:Point = new Point(0, 0);
+	var acl:Vector2D = new Point(0, 0);
+	var vel:Vector2D = new Point(0, 0);
+	var pos:Vector2D = new Point(0, 0);
 	var animation:MovieClip;
 	var state:PlayerState;
 	
@@ -38,9 +41,9 @@ class Player extends Sprite
 		super();
 		pos.x = 100;
 		pos.y = 80;
-		acl = gravity;
+		acl.y = gravity;
 		state = STAND;
-		
+
 		animation = new PlayerAnimation();
 		addChild(animation);
 		
@@ -77,13 +80,14 @@ class Player extends Sprite
 			}
 			
 			if (Input.justDown(Key.SPACE)) {
-				vel = -jumpSpeed;
+				vel.y = -jumpSpeed;
+				trace((pos+vel));
 			}
 			
-			vel += acl;
-			pos.y += vel;
-			if (vel > 2) {
-				vel = 2;
+			vel.add(acl);
+			pos.add(vel);
+			if (vel.y > fallMaxSpeed) {
+				vel.y = fallMaxSpeed;
 			}
 			if (pos.y > 80) pos.y = 80;
 			
@@ -95,6 +99,12 @@ class Player extends Sprite
 			else scaleX = 1;
 			if (vFlip) scaleY = -1;
 			else scaleY = 1;
+			
+			//スクロール処理
+			var screenDst = -x * parent.scaleX + Main.SCREEN_WIDTH / 2;
+			if (screenDst < 0) {
+				parent.x = screenDst;
+			}
 		});
 	}
 	
